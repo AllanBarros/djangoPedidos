@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cadastro-usuario/', CadastroView.as_view()),
     path('validar-login/', jwt_views.TokenObtainPairView.as_view()),
-    # path('refresh-token/', jwt_views.TokenObtainPairView.as_view()),
+    path('refresh-token/', jwt_views.TokenObtainPairView.as_view()),
     path('cadastro-compra/', PedidoView.as_view()),
     path('listar-compras/', ListarPedidosView.as_view()),
     path('acumulado-cashback/', AcumuladoCashback.as_view()),

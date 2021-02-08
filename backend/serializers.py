@@ -59,6 +59,11 @@ class PedidoSerializer(serializers.ModelSerializer):
 
         sp = set_status(p, status_selecionado)
 
+        l = logs()
+        l.acao = 'Criação de pedido'
+        l.id_revendedor = revendedor.objects.get(cpf=validated_data['cpf'].cpf)
+        l.save()
+        
         return p
 
 
@@ -75,7 +80,6 @@ class RevendedorSerializer(serializers.ModelSerializer):
 
     def validate_password(self, value: str) -> str:
         return make_password(value)
-
 
 class ListarPedidoSerializer(serializers.ModelSerializer):
 

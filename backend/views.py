@@ -22,15 +22,33 @@ class ListarPedidosView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
+
+        l = logs()
+        l.acao = 'Listar pedidos'
+        l.id_revendedor = self.request.user
+        l.save()
+
         return pedido.objects.filter(cpf_id=self.request.user.cpf)
 
 class AcumuladoCashback(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     
     def get(self, request):
+
+        l = logs()
+        l.acao = 'Acumulado Cashback'
+        l.id_revendedor = self.request.user
+        l.save()
+
         url = 'https://mdaqk8ek5j.execute-api.us-east-1.amazonaws.com/v1/cashback?'
         headers = { 'Authorization':'Bearer ZXPURQOARHiMc6Y0flhRC1LVlZQVFRnm'}
 
         r = requests.get(url, params={'cpf':request.user.cpf}, headers=headers)
 
         return JsonResponse(r.json())
+
+
+    
+    
+
+    

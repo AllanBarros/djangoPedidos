@@ -33,3 +33,10 @@ class statusPedido(models.Model):
 class status(models.Model):
     id_status = models.AutoField(primary_key=True)
     status = models.CharField(max_length=50, default="Em validação")
+
+
+class logs(models.Model):
+    id_log = models.AutoField(primary_key=True)
+    acao = models.CharField(max_length=255)
+    data = models.DateTimeField(auto_now_add=True)
+    id_revendedor = models.ForeignKey('revendedor', on_delete=models.PROTECT)
